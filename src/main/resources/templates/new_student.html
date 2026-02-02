@@ -3,43 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <title>Add New Student</title>
+
     <style>
-        body { font-family: Arial; margin: 30px; }
-        form { max-width: 400px; margin: auto; }
-        label { display: block; margin: 10px 0 5px; }
-        input[type="text"], input[type="email"] {
-            width: 100%; padding: 8px; box-sizing: border-box;
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
         }
+
+        .container {
+            max-width: 500px;
+            margin: 60px auto;
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: border 0.3s;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .btn-group {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+        }
+
         button {
-            margin-top: 15px; padding: 10px 20px;
-            background-color: #28a745; color: white; border: none;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
             cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
         }
-        button:hover { background-color: #218838; }
+
+        .save-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #218838;
+        }
+
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #5a6268;
+        }
     </style>
 </head>
+
 <body>
 
-<h2 style="text-align:center;">Add New Student</h2>
+<div class="container">
 
-<form th:action="@{/students}" th:object="${student}" method="post">
-    <label for="name">Name:</label>
-    <input type="text" id="name" th:field="*{name}" required />
+    <h2>➕ Add New Student</h2>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" th:field="*{email}" required />
+    <form th:action="@{/students}" th:object="${student}" method="post">
 
-    <label for="address">Address:</label>
-    <input type="text" id="address" th:field="*{address}" required />
- 
-    <button type="submit">Save Student</button>
-	<button class="text-white"><a th:href="@{/students}">Back to List</a></button>
-</form>
+        <label>Name</label>
+        <input type="text" th:field="*{name}" placeholder="Enter student name" required />
 
+        <label>Email</label>
+        <input type="email" th:field="*{email}" placeholder="Enter student email" required />
+
+        <label>Address</label>
+        <input type="text" th:field="*{address}" placeholder="Enter student address" required />
+
+        <!-- ✅ Buttons -->
+        <div class="btn-group">
+            <button type="submit" class="save-btn">Save Student</button>
+
+            <a th:href="@{/students}" class="back-btn">⬅ Back</a>
+        </div>
+
+    </form>
+
+</div>
 
 </body>
 </html>
-
-
-
-

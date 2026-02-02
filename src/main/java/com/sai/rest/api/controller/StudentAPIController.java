@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sai.rest.api.entity.Student;
 import com.sai.rest.api.service.StudentService;
+import com.sai.rest.api.service.searchService;
 
 @RestController
 @RequestMapping("/api/")
@@ -23,6 +25,9 @@ public class StudentAPIController {
 
 	@Autowired
 	private StudentService studentService;
+	
+	@Autowired
+	private searchService searchSer;
 	
 	@PostMapping("/saveStudent")
 	public ResponseEntity<Student> createStudent(@RequestBody Student student) {
@@ -45,5 +50,12 @@ public class StudentAPIController {
 	public ResponseEntity<HttpStatus> deleteStudent(@PathVariable("id") long id){
 		studentService.deleteStudent(id);
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/search")
+	public List<Student> search(@RequestParam String keyword){
+		return searchSer.searchName(keyword);
+		
 	}
 }
